@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "wealth:build:production"
+              "buildTarget": "wealth:build:production"
             },
             "development": {
-              "browserTarget": "wealth:build:development"
+              "buildTarget": "wealth:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "wealth:build"
+            "buildTarget": "wealth:build"
           }
         },
         "test": {
