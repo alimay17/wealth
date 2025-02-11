@@ -10,23 +10,18 @@ var mongoose = require('mongoose');
 
 // import the routing file to handle the default (index) route
 var index = require('./server/routes/app');
-const documentBreath = require('./server/routes/breath');
-
+// const documentBreath = require('./server/routes/breath');
 
 var app = express(); // create an instance of express
 
-
 // connect to mongo db
-mongoose.connect('mongodb://127.0.0.1:27017/rugen',
-  { useNewUrlParser: true }, (err, res) => {
-     if (err) {
-        console.log('Connection failed: ' + err);
-     }
-     else {
-        console.log('Connected to database!');
-     }
-  }
-);
+mongoose.connect('mongodb://127.0.0.1:27017/rugen');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection failed'));
+db.once('open', function() {
+  console.log("Connection Successful");
+});
+
 
 // Tell express to use the following parsers for POST data
 app.use(bodyParser.json());
@@ -59,7 +54,7 @@ app.use(express.static(path.join(__dirname, 'dist/wealth')));
 app.use('/', index);
 
 // internal routing
-app.use('/api/messages', breathRoutes);
+// app.use('/api/messages', breathRoutes);
 
 
 // Tell express to map all other non-defined routes back to the index page
